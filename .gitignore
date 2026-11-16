@@ -1,11 +1,7 @@
 .env
+.env.local
 *.log
 logs/
-<<<<<<< HEAD
-=======
-.env.local
 .venv/
-
 __pycache__/
 *.py[cod]
->>>>>>> 93d0e0f (chore: ignorer les fichiers Python temporaires)
