@@ -2,3 +2,6 @@
 *.log
 logs/
 .env.local
+.venv/
+__pycache__/
+*.py[cod]
