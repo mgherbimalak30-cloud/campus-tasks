@@ -1,5 +1,4 @@
-          cache: pip
-          cache-dependency-path: requirements-dev.txtname: CI
+name: CI
 
 on:
   pull_request:
@@ -20,4 +19,28 @@ jobs:
 
       - run: pip install -r requirements-dev.txt
 
-      - run: pytest -q
+      - name: Executer les tests
+        run: pytest -q --junitxml=report.xml
+
+      - name: Conserver le rapport de tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-tests
+          path: report.xml
+
+  docker-build:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Construire l'image Docker
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: campus-tasks:ci
