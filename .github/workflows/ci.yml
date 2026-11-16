@@ -1,4 +1,5 @@
-name: CI
+          cache: pip
+          cache-dependency-path: requirements-dev.txtname: CI
 
 on:
   pull_request:
